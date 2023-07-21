@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace test.domain.ValueObjects.Product;
+namespace crud.test.Domain.ValueObjects.Product;
 
 public record Date
 {
