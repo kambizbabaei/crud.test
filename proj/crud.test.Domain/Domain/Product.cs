@@ -1,4 +1,5 @@
 ﻿using crud.test.Abstraction.Domain;
+using crud.test.Domain.DomainEvents;
 using crud.test.Domain.ValueObjects.Product;
 
 namespace crud.test.Domain.Domain;
@@ -15,6 +16,16 @@ public class Product : AggregateRoot<ProductId>
     {
     }
 
+    public Product(Product product)
+    {
+        IsAvailable = product.IsAvailable;
+        IsAvailable = product.IsAvailable;
+        ManufactureEmail = product.ManufactureEmail;
+        ManufacturePhone = product.ManufacturePhone;
+        Name = product.Name;
+        ProduceDate = product.ProduceDate;
+    }
+
     internal Product(ProductId id, bool isAvailable, Email manufactureEmail, Phone manufacturePhone, Date produceDate,
         ProductName name)
     {
@@ -28,13 +39,15 @@ public class Product : AggregateRoot<ProductId>
 
     public ProductId Id { get; private set; }
 
-    public Product UpdateStatus(Product updatdProduct)
+    public Product UpdateStatus(Product updatedProduct)
     {
-        IsAvailable = updatdProduct.IsAvailable;
-        ManufactureEmail = updatdProduct.ManufactureEmail;
-        ManufacturePhone = updatdProduct.ManufacturePhone;
-        Name = updatdProduct.Name;
-        ProduceDate = updatdProduct.ProduceDate;
+        var lastState = new Product(this);
+        IsAvailable = updatedProduct.IsAvailable;
+        ManufactureEmail = updatedProduct.ManufactureEmail;
+        ManufacturePhone = updatedProduct.ManufacturePhone;
+        Name = updatedProduct.Name;
+        ProduceDate = updatedProduct.ProduceDate;
+        AddEvent(new ProductUpdatedEvent(lastState, this));
         return this;
     }
 }
