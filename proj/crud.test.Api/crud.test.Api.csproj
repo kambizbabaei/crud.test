@@ -11,4 +11,9 @@
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0"/>
     </ItemGroup>
 
+    <ItemGroup>
+        <ProjectReference Include="..\crud.test.Abstraction\crud.test.Abstraction.csproj"/>
+        <ProjectReference Include="..\crud.test.Application\crud.test.Application.csproj"/>
+    </ItemGroup>
+
 </Project>
