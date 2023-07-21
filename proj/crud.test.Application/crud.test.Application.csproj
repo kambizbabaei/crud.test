@@ -6,4 +6,9 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+        <ProjectReference Include="..\crud.test.Abstraction\crud.test.Abstraction.csproj"/>
+        <ProjectReference Include="..\crud.test.Domain\crud.test.Domain.csproj"/>
+    </ItemGroup>
+
 </Project>
