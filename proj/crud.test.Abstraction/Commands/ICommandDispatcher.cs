@@ -1,4 +1,4 @@
-﻿namespace Test.abstraction.Commands;
+﻿namespace crud.test.Abstraction.Commands;
 
 public interface ICommandDispatcher
 {

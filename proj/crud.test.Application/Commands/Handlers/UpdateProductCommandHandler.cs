@@ -1,5 +1,5 @@
-﻿using crud.test.Domain.Repositories;
-using Test.abstraction.Commands;
+﻿using crud.test.Abstraction.Commands;
+using crud.test.Domain.Repositories;
 
 namespace crud.test.Application.Commands.Handlers;
 

@@ -1,5 +1,5 @@
-﻿using crud.test.Domain.Domain;
-using Test.abstraction.Commands;
+﻿using crud.test.Abstraction.Commands;
+using crud.test.Domain.Domain;
 
 namespace crud.test.Application.Commands;
 
