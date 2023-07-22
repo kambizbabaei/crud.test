@@ -12,14 +12,14 @@ public record ProductName
 
     public string Value { get; }
 
-    public static implicit operator string(ProductName id)
+    public static implicit operator string(ProductName name)
     {
-        return id.Value;
+        return name.Value;
     }
 
-    public static implicit operator ProductName(Guid id)
+    public static implicit operator ProductName(string name)
     {
-        return new ProductName(id);
+        return new ProductName(name);
     }
 
     public override string ToString()

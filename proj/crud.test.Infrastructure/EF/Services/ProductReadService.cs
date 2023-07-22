@@ -13,7 +13,7 @@ internal sealed class ProductsReadService : IProductReadServices
 
     public ProductsReadService(ReadDbContext context)
     {
-        _products = context.Products;
+        _products = context.ProductReadModel;
     }
 
     public Task<bool> ExistsByNameAsync(string name)
@@ -33,6 +33,6 @@ internal sealed class ProductsReadService : IProductReadServices
 
     public async Task<ProductDto> GetAsync(Guid id)
     {
-        return (await _products.SingleOrDefaultAsync(product => product.Id == id)).AsDto();
+        return (await _products.AsQueryable().SingleOrDefaultAsync(product => product.Id == id)).AsDto();
     }
 }

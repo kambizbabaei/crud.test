@@ -10,7 +10,7 @@ internal sealed class WriteDbContext : DbContext
     {
     }
 
-    public DbSet<Product> ProductReadModels { get; set; }
+    public DbSet<Product> Product { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

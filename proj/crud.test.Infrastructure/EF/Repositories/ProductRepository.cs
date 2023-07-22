@@ -12,9 +12,9 @@ internal sealed class ProductRepository : IProductRepository
     private readonly WriteDbContext _writeDbContext;
 
 
-    public ProductRepository(DbSet<Product> products, WriteDbContext writeDbContext)
+    public ProductRepository(WriteDbContext writeDbContext)
     {
-        _products = products;
+        _products = writeDbContext.Product;
         _writeDbContext = writeDbContext;
     }
 

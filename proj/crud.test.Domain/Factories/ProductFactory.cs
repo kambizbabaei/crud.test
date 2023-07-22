@@ -4,16 +4,10 @@ namespace crud.test.Domain.Factories;
 
 public class ProductFactory : IProductFactory
 {
-    public Product Create(bool IsAvailable, string ManufactureEmail, string ManufacturePhone, DateTime ProduceDate,
+    public Product Create(Guid id ,bool IsAvailable, string ManufactureEmail, string ManufacturePhone, DateTime ProduceDate,
         string Name)
     {
-        throw new NotImplementedException();
+        return new Product(id, IsAvailable, ManufactureEmail, ManufacturePhone, ProduceDate, Name);
     }
-
-    public Product Create(
-        (bool IsAvailable, string ManufactureEmail, string ManufacturePhone, DateTime ProduceDate, string Name)
-            ProductData)
-    {
-        throw new NotImplementedException();
-    }
+    
 }

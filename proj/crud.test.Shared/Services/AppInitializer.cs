@@ -2,35 +2,34 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace crud.test.Shared.Services;
-
-internal sealed class AppInitializer : IHostedService
+namespace crud.test.Shared.Services
 {
-    private readonly IServiceProvider _serviceProvider;
-
-    public AppInitializer(IServiceProvider serviceProvider)
+    internal sealed class AppInitializer : IHostedService
     {
-        _serviceProvider = serviceProvider;
-    }
+        private readonly IServiceProvider _serviceProvider;
 
-    public async Task StartAsync(CancellationToken cancellationToken)
-    {
-        var dbContextTypes = AppDomain.CurrentDomain.GetAssemblies()
-            .SelectMany(a => a.GetTypes())
-            .Where(a => typeof(DbContext).IsAssignableFrom(a) && !a.IsInterface && a != typeof(DbContext));
+        public AppInitializer(IServiceProvider serviceProvider)
+            => _serviceProvider = serviceProvider;
 
-        using var scope = _serviceProvider.CreateScope();
-        foreach (var dbContextType in dbContextTypes)
+        public async Task StartAsync(CancellationToken cancellationToken)
         {
-            var dbContext = scope.ServiceProvider.GetRequiredService(dbContextType) as DbContext;
-            if (dbContext is null) continue;
+            var dbContextTypes = AppDomain.CurrentDomain.GetAssemblies()
+                .SelectMany(a => a.GetTypes())
+                .Where(a => typeof(DbContext).IsAssignableFrom(a) && !a.IsInterface && a != typeof(DbContext));
 
-            await dbContext.Database.EnsureCreatedAsync(cancellationToken);
+            using var scope = _serviceProvider.CreateScope();
+            foreach (var dbContextType in dbContextTypes)
+            {
+                var dbContext = scope.ServiceProvider.GetRequiredService(dbContextType) as DbContext;
+                if (dbContext is null)
+                {
+                    continue;
+                }
+
+                await dbContext.Database.EnsureCreatedAsync(cancellationToken);
+            }
         }
-    }
 
-    public Task StopAsync(CancellationToken cancellationToken)
-    {
-        return Task.CompletedTask;
+        public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;
     }
 }

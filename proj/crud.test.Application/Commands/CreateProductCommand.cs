@@ -2,5 +2,5 @@
 
 namespace crud.test.Application.Commands;
 
-public record CreateProductCommand(bool IsAvailable, string ManufactureEmail, string ManufacturePhone,
+public record CreateProductCommand(Guid id ,bool IsAvailable, string ManufactureEmail, string ManufacturePhone,
     DateTime ProduceDate, string Name) : ICommand;
