@@ -2,12 +2,18 @@
 
 namespace crud.test.Domain.Factories;
 
-public interface IProductFactory
+public class ProductFactory : IProductFactory
 {
-    Product Create(bool IsAvailable, string ManufactureEmail, string ManufacturePhone, DateTime ProduceDate,
-        string Name);
+    public Product Create(bool IsAvailable, string ManufactureEmail, string ManufacturePhone, DateTime ProduceDate,
+        string Name)
+    {
+        throw new NotImplementedException();
+    }
 
-    Product Create(
+    public Product Create(
         (bool IsAvailable, string ManufactureEmail, string ManufacturePhone, DateTime ProduceDate, string Name)
-            ProductData);
+            ProductData)
+    {
+        throw new NotImplementedException();
+    }
 }
