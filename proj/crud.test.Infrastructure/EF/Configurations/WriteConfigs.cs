@@ -12,28 +12,29 @@ public class WriteConfigs : IEntityTypeConfiguration<Product>
     {
         builder.HasKey(pl => pl.Id);
 
-        var NameConverter = new ValueConverter<ProductName, string>(pn => pn.ToString(),
+        var nameConverter = new ValueConverter<ProductName, string>(pn => pn.ToString(),
             l => new ProductName(l));
 
         var manufactureEmailConverter = new ValueConverter<Email, string>(pme => pme.ToString(),
             pln => new Email(pln));
 
-        var IdConverter = new ValueConverter<ProductId, Guid>(pid => pid.Value,
+        var idConverter = new ValueConverter<ProductId, Guid>(pid => pid.Value,
             pid => new ProductId(pid));
 
-        var ProductManufactureDate = new ValueConverter<Date, DateTime>(pd => pd.Value,
+        var productManufactureDate = new ValueConverter<Date, DateTime>(pd => pd.Value,
             pd => new Date(pd));
+        if (productManufactureDate == null) throw new ArgumentNullException(nameof(productManufactureDate));
 
-        var PhoneConverter = new ValueConverter<Phone, string>(pd => pd.Value,
+        var phoneConverter = new ValueConverter<Phone, string>(pd => pd.Value,
             pd => new Phone(pd));
 
         builder
             .Property(p => p.Id)
-            .HasConversion(IdConverter);
+            .HasConversion(idConverter);
 
         builder
             .Property(typeof(ProductName), "Name")
-            .HasConversion(NameConverter)
+            .HasConversion(nameConverter)
             .HasColumnName("ProductName");
 
         builder
@@ -43,17 +44,15 @@ public class WriteConfigs : IEntityTypeConfiguration<Product>
 
         builder
             .Property(typeof(Phone), "ManufacturePhone")
-            .HasConversion(PhoneConverter)
+            .HasConversion(phoneConverter)
             .HasColumnName("ManufacturePhone");
 
         builder
             .Property(typeof(Date), "ProduceDate")
-            .HasConversion(ProductManufactureDate)
+            .HasConversion(productManufactureDate)
             .HasColumnName("ProduceDate");
-
-        builder.HasKey(x => x.Id);
-
-
+        builder.Property(typeof(bool), "IsAvailable").HasColumnName("IsAvailable");
         builder.ToTable("Products");
     }
+    
 }

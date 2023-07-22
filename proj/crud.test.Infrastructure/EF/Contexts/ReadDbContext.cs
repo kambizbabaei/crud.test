@@ -10,12 +10,12 @@ internal sealed class ReadDbContext : DbContext
     {
     }
 
-    public DbSet<ProductReadModel> Products { get; set; }
+    public DbSet<ProductReadModel> ProductReadModel { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.HasDefaultSchema("Products");
-        var Configuration = new ReadConfigs();
-        modelBuilder.ApplyConfiguration<ProductReadModel>(Configuration);
+        var configuration = new ReadConfigs();
+        modelBuilder.ApplyConfiguration(configuration);
     }
 }

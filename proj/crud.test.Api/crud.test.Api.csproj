@@ -7,14 +7,18 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.7"/>
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0"/>
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.7" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.9">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\crud.test.Abstraction\crud.test.Abstraction.csproj"/>
-        <ProjectReference Include="..\crud.test.Application\crud.test.Application.csproj"/>
-        <ProjectReference Include="..\crud.test.Infrastructure\crud.test.Infrastructure.csproj"/>
+        <ProjectReference Include="..\crud.test.Abstraction\crud.test.Abstraction.csproj" />
+        <ProjectReference Include="..\crud.test.Application\crud.test.Application.csproj" />
+        <ProjectReference Include="..\crud.test.Infrastructure\crud.test.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>
