@@ -1,7 +1,18 @@
+using crud.test.Application;
+using crud.test.Infrastructure;
+using crud.test.Shared;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+
+var configuration = builder.Configuration;
+
+builder.Services.AddShared();
+builder.Services.AddApplication();
+builder.Services.AddInfrastructure(configuration);
+//
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -17,6 +28,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseShared();
+
 
 app.UseAuthorization();
 

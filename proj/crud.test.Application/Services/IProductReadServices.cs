@@ -1,6 +1,6 @@
 ﻿using crud.test.Application.Dtoes;
 
-namespace test.Application.Services;
+namespace crud.test.Application.Services;
 
 public interface IProductReadServices
 {
