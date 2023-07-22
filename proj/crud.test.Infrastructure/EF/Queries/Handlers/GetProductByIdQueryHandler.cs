@@ -1,7 +1,7 @@
 ﻿using crud.test.Abstraction.Queries;
 using crud.test.Application.Dtoes;
 using crud.test.Application.Queries;
-using test.Application.Services;
+using crud.test.Application.Services;
 
 namespace crud.test.Infrastructure.EF.Queries.Handlers;
 
