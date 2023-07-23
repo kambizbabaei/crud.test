@@ -17,5 +17,6 @@ internal sealed class RemoveProductCommandHandler : ICommandHandler<RemoveProduc
         var product = await _repository.GetAsync(command.Id);
         // todo: exception
         await _repository.DeleteAsync(product);
+        await _repository.SaveChangesAsync();
     }
 }

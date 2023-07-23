@@ -1,7 +1,7 @@
+using crud.test.Abstraction.ServiceLocator;
 using crud.test.Application;
 using crud.test.Infrastructure;
 using crud.test.Shared;
-
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +18,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+ServiceLocator.ServiceProvider = builder.Services.BuildServiceProvider();
 
 var app = builder.Build();
 

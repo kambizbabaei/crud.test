@@ -5,10 +5,8 @@ namespace crud.test.Domain.ValueObjects.Product;
 
 public record Email
 {
-    private const string EmailPattern = @"^(?!\.)(""([^""\r\\]|\\[""\r\\])*""|"
-                                        + @"([-a-z0-9!#$%&'*+/=?^_`{|}~]|(?<![!#$%&'*+/=?^_`{|}~.])"
-                                        + @"(?<![.-])@)(?:[a-z0-9][a-z0-9-]{0,62}[a-z0-9]\.)+"
-                                        + @"[a-z0-9][a-z0-9-]{0,62}[a-z0-9])$";
+    private const string EmailPattern =
+        "^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$";
 
     public Email(string value)
     {

@@ -11,13 +11,20 @@ public class Product : AggregateRoot<ProductId>
     private Phone ManufacturePhone;
     private ProductName Name;
     private Date ProduceDate;
-    public ProductId Id { get; private set; }
-
 
     public Product()
     {
-        
     }
+
+    public Product(Product product)
+    {
+        IsAvailable = product.IsAvailable;
+        ManufactureEmail = product.ManufactureEmail;
+        ManufacturePhone = product.ManufacturePhone;
+        Name = product.Name;
+        ProduceDate = product.ProduceDate;
+    }
+
     internal Product(ProductId id, bool isAvailable, Email manufactureEmail, Phone manufacturePhone, Date produceDate,
         ProductName name)
     {
@@ -28,21 +35,28 @@ public class Product : AggregateRoot<ProductId>
         Name = name;
         Id = id;
     }
-    
 
-    public void UpdateStatus(Product updatedProduct)
+    public ProductId Id { get; private set; }
+
+    public Product UpdateStatus(Product updatedProduct)
     {
-        var lastState = GetCopy();
+        var lastState = new Product(this);
         IsAvailable = updatedProduct.IsAvailable;
         ManufactureEmail = updatedProduct.ManufactureEmail;
         ManufacturePhone = updatedProduct.ManufacturePhone;
         Name = updatedProduct.Name;
         ProduceDate = updatedProduct.ProduceDate;
         AddEvent(new ProductUpdatedEvent(lastState, this));
+        return this;
     }
 
-    private Product GetCopy()
+    public Email GetEmail()
     {
-        return new Product(Id, IsAvailable, ManufactureEmail, ManufacturePhone, ProduceDate, Name);
+        return ManufactureEmail;
+    }
+
+    public Date GetProduceDate()
+    {
+        return ProduceDate;
     }
 }

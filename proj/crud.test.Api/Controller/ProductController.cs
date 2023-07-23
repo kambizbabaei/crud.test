@@ -47,7 +47,7 @@ public class ProductController : BaseController
         return Ok();
     }
 
-    [HttpPost("{ProductId:guid}")]
+    [HttpPost()]
     public async Task<IActionResult> Post([FromBody] CreateProductCommand command)
     {
         await _commandDispatcher.DispatchAsync(command);

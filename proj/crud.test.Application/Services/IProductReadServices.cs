@@ -7,6 +7,7 @@ public interface IProductReadServices
     Task<bool> ExistsByNameAsync(string name);
 
     Task<List<ProductDto>> GetProductsByName(string name);
+    Task<List<ProductDto>> GetProductsByManufactureEmail(string email);
 
     Task<IQueryable<ProductDto>> GetAllProducts();
     Task<ProductDto> GetAsync(Guid id);

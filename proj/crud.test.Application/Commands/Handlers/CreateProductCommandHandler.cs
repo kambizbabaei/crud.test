@@ -7,7 +7,7 @@ namespace crud.test.Application.Commands.Handlers;
 public class CreateProductCommandHandler : ICommandHandler<CreateProductCommand>
 {
     private readonly IProductFactory _productFactory;
-    public readonly IProductRepository _repository;
+    private readonly IProductRepository _repository;
 
     public CreateProductCommandHandler(IProductRepository repository, IProductFactory productFactory)
     {
@@ -17,9 +17,10 @@ public class CreateProductCommandHandler : ICommandHandler<CreateProductCommand>
 
     public async Task HandleAsync(CreateProductCommand command)
     {
-        var p = _productFactory.Create(command.id,command.IsAvailable, command.ManufactureEmail,
-            command.ManufacturePhone, command.ProduceDate, command.Name);
-        var product = await _repository.AddAsync(p);
+        var product = await _repository.AddAsync(_productFactory.Create(command.id, command.IsAvailable,
+            command.ManufactureEmail,
+            command.ManufacturePhone, command.ProduceDate, command.Name));
         var productEntity = await _repository.AddAsync(product);
+        await _repository.SaveChangesAsync();
     }
 }
