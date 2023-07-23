@@ -26,13 +26,18 @@ internal sealed class ProductsReadService : IProductReadServices
         return _products.Select<ProductReadModel, ProductDto>(x => x.AsDto()).ToList();
     }
 
+    public async Task<List<ProductDto>> GetProductsByManufactureEmail(string email)
+    {
+        return _products.Where(x => x.ManufactureEmail == email).Select(x => x.AsDto()).ToList();
+    }
+
     public async Task<IQueryable<ProductDto>> GetAllProducts()
     {
-        return _products.AsQueryable().Select<ProductReadModel, ProductDto>(x => x.AsDto());
+        return _products.Select<ProductReadModel, ProductDto>(x => x.AsDto());
     }
 
     public async Task<ProductDto> GetAsync(Guid id)
     {
-        return (await _products.AsQueryable().SingleOrDefaultAsync(product => product.Id == id)).AsDto();
+        return (await _products.SingleOrDefaultAsync(product => product.Id == id)).AsDto();
     }
 }

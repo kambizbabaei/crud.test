@@ -17,5 +17,6 @@ public class UpdateProductCommandHandler : ICommandHandler<UpdateProductCommand>
         var product = await _repository.GetAsync(command.UpdateFields.Id);
         // todo: exception 
         await _repository.UpdateAsync(command.UpdateFields);
+        await _repository.SaveChangesAsync();
     }
 }

@@ -1,42 +1,35 @@
 ﻿namespace crud.test.Abstraction.Domain;
 
+public abstract class AggregateRoot<T> : IAggregateRoot
+{
+    private readonly List<IDomainEvent> _events = new();
+    private bool _versionIncremented;
+    public T Id { get; protected set; }
+    public int Version { get; protected set; }
+    public IEnumerable<IDomainEvent> Events => _events;
 
-    public abstract class AggregateRoot<T>
+    protected void AddEvent(IDomainEvent @event)
     {
-        public T Id { get; protected set; }
-        public int Version { get; protected set; }
-
-        private bool _versionIncremented;
-
-
-        public IEnumerable<IDomainEvent> Events => _events;
-
-        private readonly List<IDomainEvent> _events = new();
-
-
-        protected void AddEvent(IDomainEvent @event)
+        if (!_events.Any() && !_versionIncremented)
         {
-            if (!_events.Any() && !_versionIncremented)
-            {
-                Version++;
-                _versionIncremented = true;
-            }
-
-            _events.Add(@event);
-        }
-
-        public void ClearEvents() => _events.Clear();
-
-
-
-        protected void IncrementVersion()
-        {
-            if (_versionIncremented)
-            {
-                return;
-            }
-
             Version++;
             _versionIncremented = true;
         }
+
+        _events.Add(@event);
     }
+
+    public void ClearEvent()
+    {
+        _events.Clear();
+    }
+
+
+    protected void IncrementVersion()
+    {
+        if (_versionIncremented) return;
+
+        Version++;
+        _versionIncremented = true;
+    }
+}
